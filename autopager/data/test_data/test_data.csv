@@ -1,0 +1,72 @@
+Checked,File Name,type,Encoding,Language,note,Page URL,Page Type,PREV,PAGE,NEXT,LAST,FIRST,# of non-label
+T,1,POST,UTF-8,en,POST,https://www.mittw.org.tw/products/default.aspx,a,#WebPager1 > div:nth-child(2) > a:nth-child(2),".cpb ~ a:nth-last-child(n+3), .aspnetpager span a",#WebPager1 > div:nth-child(2) > a:nth-last-child(2),#WebPager1 > div:nth-child(2) > a:nth-last-child(1),#WebPager1 > div:nth-child(2) > a:nth-child(1),0
+T,2,POST,UTF-8,zh,POST,https://www.mittw.org.tw/Home/#,n,,,,,,1
+T,3,GET,UTF-8,zh,page in page,https://www.mobile01.com/topiclist.php?f=180,a,,.c-pagination:not(.c-pagination--next):not(.c-pagination--prev),.c-pagination--next,,,0
+T,4,GET,UTF-8,zh,page in page,https://www.mobile01.com/topiclist.php?f=180&p=4,a,.c-pagination--prev,.c-pagination:not(.c-pagination--next):not(.c-pagination--prev),.c-pagination--next,,,0
+T,6,GET,UTF-8,zh,ACD,https://tw.indeed.com/jobs?q=%E7%B2%97%E5%B7%A5,a,,.pagination-list li:not(:last-child) a,.pagination-list li:last-child a,,,0
+T,7,GET,UTF-8,en,ACD,https://www.simplyhired.com/search?q=education&l=&job=YZyQieO1diZI6yVT4GtI3K2sXqsXk2az1TXBl2bZeZyfaWd4VaGdPg,a,,".Pagination-link:not(.next-pagination), .active > a",.Pagination-link.next-pagination,,,0
+T,10,GET,UTF-8,en,ACD,https://www.musicarts.com/woodwinds?page=5,b,.pagination-previous button,.pagination li:not(:nth-last-child(2)):not(:nth-child(2)) > button.ng-scope,.pagination-next button,.pagination li:nth-last-child(2) > button.ng-scope,.pagination li:nth-child(2) > button.ng-scope,0
+T,11,GET,UTF-8,en,ACD,https://www.wwbw.com/Woodwinds.wwbw,a,,"a.page-link:not(:last-child), .pageLink",.next_link,,,0
+T,12,GET,UTF-8,en,ACD,https://www.wwbw.com/Woodwinds.wwbw#pageName=department-page&N=70437&Nao=100&recsPerPage=20&profileCountryCode=US&profileCurrencyCode=USD,a,.pagePrevious,a.pageLink:not(:first-child):not(.disabled):not(:last-child),.pageNext,,,0
+T,13,GET,cp1252,en,ACD,https://www.idjnow.com/lighting/lighting-effects.html?p=1,a,,.pages a:not(.next),.next,,,0
+T,14,GET,cp1252,en,ACD,https://www.idjnow.com/lighting/lighting-effects.html?p=3,a,.previous,.pages a:not(.next):not(.previous),.next,,,0
+T,15,GET,UTF-8,en,ACD,https://www.sheetmusicnow.com/collections/piano-c2?page=1,a,,.paginate span:not(.next) a,.next a,,,0
+T,16,GET,UTF-8,en,ACD,https://www.sheetmusicnow.com/collections/piano-c2?page=10,a,.prev a,.paginate span:not(.next):not(.prev) a,.next a,,,0
+T,17,GET,UTF-8,zh,ACD,https://nba.udn.com/nba/cate/6754/-1/newest/3,a,.pagelink goback a:nth-child(2),.pagelink gopage a,.pagelink gonext a:nth-child(1),.pagelink gonext a:nth-child(2),.pagelink goback a:nth-child(1),0
+T,18,GET,UTF-8,en,ACD,https://www.turntablelab.com/collections/dj-production-alpha?_=pf&page=1,a,,.pagination a:not(.next),.next,,,0
+T,19,GET,UTF-8,en,ACD,https://www.turntablelab.com/collections/dj-production-alpha?_=pf&page=10,a,.prev,.pagination a:not(.next):not(.prev),.next,,,0
+T,20,GET,UTF-8,en,ACD,https://www.chicagomusicexchange.com/collections/acoustic-guitars,a,,.ss-pagination li:not(.last) a,.ss-pagination .last a,,,0
+T,24,GET,UTF-8,en,ACD,https://www.alibris.com,n,,,,,,1
+T,28,GET,UTF-8,zh,ACD,https://www.goal.com/zh-tw,n,,,,,,1
+T,33,GET,UTF-8,en,ACD,https://www.indiewire.com/,n,,,,,,1
+T,45,GET,UTF-8,en,page in page,https://community.myfitnesspal.com/en/discussions,a,,.NumberedPager a:nth-child(n):nth-last-child(n+3),.NumberedPager a.Next,,,0
+T,46,GET,UTF-8,zh,ACD,https://www.hfec.org.tw/events,n,,,,,,1
+T,47,GET,UTF-8,zh,ACD,https://www.hfec.org.tw/meme-entrance,n,,,,,,1
+T,48,GET,UTF-8,en,ACD,https://www.psychologytoday.com/intl,n,,,a.page-link,,,0
+T,49,GET,UTF-8,en,ACD,https://www.psychologytoday.com/intl/blog-posts?page=1,a,li:nth-child(1) a.page-link,,li:nth-child(3) a.page-link,,,0
+T,50,GET,UTF-8,en,ACD,https://www.medscape.com/,n,,,,,,1
+T,55,GET,UTF-8,zh,alexa,https://bangqu.com/index.html,a,,.pagination li:not(:last-child) a,.pagination li:last-child a,,,0
+T,56,GET,UTF-8,en,ACD,https://www.globalpropertyguide.com/Asia,n,,,,,,
+T,57,GET,UTF-8,zh,alexa,https://bangqu.com/index.html?pagenum=10,a,.pagination li:nth-child(1) a,.pagination li:nth-child(n+2):nth-last-child(n+2) a,.pagination li:nth-last-child(1) a,,,0
+T,58,GET,UTF-8,zh,alexa,http://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=japan&fenlei=256&rsv_pq=82d40a510002f5fa&rsv_t=eda3ZpU0d7wbxvPiI8dQjph1yppDXZspGXtmJkWlZ%2Bk9ai0t6SMniYOlr%2Bs&rqlang=cn&rsv_enter=1&rsv_dl=tb&rsv_sug3=8&rsv_sug1=2&rsv_sug7=100&rsv_sug2=0&rsv_btype=i&inputT=2566&rsv_sug4=3837,a,,.page-inner a:not(.n),.page-inner a.n,,,0
+T,66,GET,UTF-8,zh,alexa,https://www.360.cn/,n,,,,,,1
+T,67,GET,UTF-8,zh,alexa,https://www.360.cn/news.html,n,,,,,,1
+T,68,GET,UTF-8,zh,alexa,https://e.360.cn/,n,,,,,,1
+T,69,GET,UTF-8,en,alexa,https://www.bing.com/?toWww=1&redig=88E5EF810B0845499F4FA8EF245270D8,n,,,,,,1
+T,71,GET,UTF-8,zh,alexa,https://www.bing.com/search?q=python&sp=-1&pq=pytho&sc=8-5&qs=n&sk=&cvid=9221794471FA4E1BB14CE4A657B1910C&first=21&FORM=PERE1,a,.b_pag li:first-child a,.b_pag li:nth-child(n+2):nth-last-child(n+2) a,.b_pag li:last-child a,,,0
+T,74,GET,UTF-8,en,ACD,https://activerain.com/,a,,.pagination li:nth-child(n+2):nth-last-child(n+2) a,.pagination li:nth-last-child(1) a,,,0
+T,77,GET,UTF-8,en,alexa,https://www.ebay.com/,n,,,,,,1
+T,82,GET,UTF-8,en,alexa,https://chaturbate.com/,a,.paging a.prev,.paging a:not(.prev):not(.next),.paging a.next,,,0
+T,83,GET,UTF-8,en,ACD,https://www.globest.com/technology/,n,,,,,,
+T,85,GET,UTF-8,zh,alexa,https://www.huanqiu.com/,n,,,,,,1
+T,86,GET,UTF-8,zh,alexa,https://taiwan.huanqiu.com/,n,,,,,,1
+T,87,GET,UTF-8,zh,alexa,https://taiwan.huanqiu.com/article/41UsqrlnP9Q,n,,,,,,1
+T,93,GET,UTF-8,zh,alexa,https://www.csdn.net/,n,,,,,,1
+T,94,GET,UTF-8,zh,alexa,https://www.csdn.net/nav/python?spm=1000.2115.3001.4125,n,,,,,,1
+T,95,GET,UTF-8,zh,alexa,https://blog.csdn.net/Six23333/article/details/112478539?utm_medium=distribute.pc_category.none-task-blog-hot-1.nonecase&depth_1-utm_source=distribute.pc_category.none-task-blog-hot-1.nonecase&request_id=,n,,,,,,1
+T,97,GET,UTF-8,en,alexa,https://lifestyle.okezone.com/read/2021/01/14/194/2344101/tak-disangka-outer-keren-amanda-manopo-ini-harganya-cuma-rp300-ribu,n,,,,,,1
+T,98,GET,UTF-8,zh,alexa,http://xinhuanet.com/,n,,,,,,1
+T,99,GET,UTF-8,zh,alexa,http://www.xinhuanet.com/legal/index.htm,n,,,,,,1
+T,326,,UTF-8,zh,-,https://ysmb.wda.gov.tw/,n,,,,,,
+T,327,,UTF-8,zh,-,https://ysmb.wda.gov.tw/about.php,n,,,,,,
+T,328,,UTF-8,zh,-,https://ysmb.wda.gov.tw/news.php,a,,.pagination li:nth-child(n):nth-last-child(n+3) a,.pagination li:nth-last-child(2) a,.pagination li:nth-last-child(1) a,,
+T,329,,UTF-8,zh,-,https://ysmb.wda.gov.tw/news.php?page=4&id=1,a,.pagination li:nth-child(2) a,.pagination li:nth-child(n+3):nth-last-child(n+3) a,.pagination li:nth-last-child(2) a,.pagination li:nth-last-child(1) a,.pagination li:nth-child(1) a,
+T,330,,UTF-8,zh,-,https://ysmb.wda.gov.tw/activity_all.php,a,,.pagination li:nth-child(n):nth-last-child(n+3) a,.pagination li:nth-last-child(2) a,.pagination li:nth-last-child(1) a,,
+T,331,,UTF-8,zh,-,https://ysmb.wda.gov.tw/activity_all.php?page=4&id=1,a,.pagination li:nth-child(2) a,.pagination li:nth-child(n+3):nth-last-child(n+3) a,.pagination li:nth-last-child(2) a,.pagination li:nth-last-child(1) a,.pagination li:nth-child(1) a,
+T,332,,UTF-8,zh,-,https://youth.tycg.gov.tw/index.jsp,n,,,,,,
+T,333,,UTF-8,zh,-,"https://youth.tycg.gov.tw/home.jsp?id=10426&parentpath=0,10410",a,,.style_37-2 a,.style_37-1 a,.style_37-3 a,,
+T,334,,UTF-8,zh,-,"https://youth.tycg.gov.tw/home.jsp?id=10507&parentpath=0,10415,10504",n,,,,,,
+T,335,,UTF-8,zh,-,https://www.vghks.gov.tw/Default.aspx,n,,,,,,
+T,336,,UTF-8,zh,-,https://www.vghks.gov.tw/News.aspx?n=5C1C39706402982E&sms=C5B71E23EEC92FCF,n,,,,,,
+T,337,,UTF-8,zh,-,https://www.vghks.gov.tw/News.aspx?n=E8B390B9BE5D0E7E&sms=182760718EAA9D72,a,,,.list_gotopage_b a:nth-child(4),.list_gotopage_b a:nth-child(5),,
+T,338,,UTF-8,zh,-,https://www.tys.org.tw/fycm/article_cate_list.asp?article_cate_id=2,n,,,,,,
+T,415,,UTF-8,zh,-,http://tw-toylibrary.org/new/event.php,a,.disabled a,.J-paginationjs-page a,.J-paginationjs-next a,,,
+T,416,,UTF-8,zh,-,https://www.chtf.org.tw/news,a,,,,,,
+T,417,,UTF-8,zh,-,https://www.ntmofa.gov.tw/activitysoonlist_1037.html,a,,,,,,
+T,418,,UTF-8,zh,-,http://www.cityyeast.com/passion3_list.php,a,,.td_space_07 .td_space_07 a,,,,
+T,419,,UTF-8,zh,-,https://www.nmh.gov.tw/activitysoonlist_66.html,a,,,,,,
+T,420,,UTF-8,zh,-,https://eball.tw/events/netfriend,a,,.pager-item .active,.pager-next .active,.last .active,,
+T,422,,UTF-8,zh,-,https://dac.tw/currentcoming/,a,,,,,,
+T,423,,UTF-8,zh,-,https://www.chcsec.gov.tw/informationlist?uid=291&page=6&,a,,,,,,
+T,424,,UTF-8,zh,-,https://event.culture.tw/CHCSEC/portal/Index/IndexAction?uid=527,a,,,,,,
+T,425,,UTF-8,zh,-,https://www.ntso.gov.tw/informationlist?uid=22,a,,.num,.next,.last,,

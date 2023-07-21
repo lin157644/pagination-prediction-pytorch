@@ -1,0 +1,21 @@
+name: pagination-prediction-pytorch
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch
+  - pytorch-cuda=11.7
+  - torchaudio
+  - torchvision
+  - pandas
+  - parsel
+  - scikit-learn
+  - sentence-transformers
+  - tensorboard
+  - tldextract
+  - numpy
+  - openpyxl
+  - sklearn-crfsuite
+  - matplotlib
+  - lightning
+  - scipy=1.10
