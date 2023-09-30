@@ -180,7 +180,7 @@ def _as_list(generator, limit=None) -> list:
 
 
 def link_to_features(link: parsel.Selector):
-    # Get text contecnt of the link otherwise alt or img.
+    # Get text content of the link otherwise alt or img.
     # Normalize multiple white space to one and to lowercase.
     text = normalize(get_link_text(link))
     href = get_link_href(link)
@@ -188,7 +188,7 @@ def link_to_features(link: parsel.Selector):
         href = ""
     p = urlsplit(href)
     parent = link.xpath("..").extract()
-    # Retrive the line of first tag opening
+    # Retrieve the line of first tag opening
     parent = get_first_tag(parser, parent[0])
     query_parsed = parse_qsl(p.query)  # parse query string from path
     query_param_names = [k.lower() for k, v in query_parsed]
@@ -274,7 +274,7 @@ def get_token_tag_features_from_chunks(chunks):
             token_features.append([node[0] for node in feat_list])
             tag_features.append(torch.tensor([node[1] for node in feat_list]))
         except:
-            raise Exception(f"Error occured on {idx}")
+            raise Exception(f"Error occurred on {idx}")
     return token_features, tag_features
 
 
@@ -546,58 +546,62 @@ def get_input_from_raw(
     return x, y
 
 
-def get_test_data(test_type=None, scaled_page="normal"):
-    if test_type is None:
-        print("Please assign type of test_data")
-        return (None, None, None)
-    test_X_one = []
-    test_X_two = []
-    test_y_one = []
-    test_y_two = []
-    test_page_positions_one = []
-    test_page_positions_two = []
-    if test_type != "EVENT_SOURCE":
-        storage.test_file = "NORMAL"
-        test_urls = [
-            rec["Page URL"]
-            for rec in storage.iter_test_records(exclude_en=None)
-        ]
-        test_X_one, test_y_one, test_page_positions_one = storage.get_test_Xy(
-            validate=False,
-            contain_position=True,
-            scaled_page=scaled_page,
-            exclude_en=None,
-        )
-        print(
-            "pages: {}  domains: {}".format(
-                len(test_urls), len({get_domain(url) for url in test_urls})
+def get_test_data(test_type=None, scaled_page="normal", language="en") -> tuple[list[PAGE_X], list[torch.Tensor], list[torch.Tensor]]:
+    logging.debug(f"Getting test data: {test_type=}")
+    match test_type:
+        case "MULTILINGUAL":
+            test_urls = [
+                rec["Page URL"]
+                for rec in storage.iter_test_records_by_language(language=language)
+            ]
+
+            test_X, test_y = storage.get_test_Xy_by_language(
+                language=language
             )
-        )
-        if test_type == "NORMAL":
-            return test_X_one, test_y_one, test_page_positions_one
-    if test_type != "NORMAL":
-        storage.test_file = "EVENT_SOURCE"
-        test_urls = [
-            rec["Page URL"]
-            for rec in storage.iter_test_records(exclude_en=None)
-        ]
-        test_X_two, test_y_two, test_page_positions_two = storage.get_test_Xy(
-            validate=False,
-            contain_position=True,
-            scaled_page=scaled_page,
-            exclude_en=None,
-        )
-        print(
-            "pages: {}  domains: {}".format(
-                len(test_urls), len({get_domain(url) for url in test_urls})
+            print(
+                f"pages: {len(test_urls)}  domains: {len({get_domain(url) for url in test_urls})}"
             )
-        )
-        if test_type == "EVENT_SOURCE":
-            return test_X_two, test_y_two, test_page_positions_two
-    test_X_raw = test_X_one + test_X_two
-    test_y = test_y_one + test_y_two
-    test_positions = test_page_positions_one + test_page_positions_two
-    return test_X_raw, test_y, test_positions
+            return test_X, test_y, test_page_positions
+        case "NORMAL":
+            storage.test_file = "NORMAL"
+            test_urls = [
+                rec["Page URL"]
+                for rec in storage.iter_test_records(exclude_en=None)
+            ]
+            test_X, test_y, test_page_positions = storage.get_test_Xy(
+                validate=False,
+                contain_position=True,
+                scaled_page=scaled_page,
+                exclude_en=None,
+            )
+            print(
+                "pages: {}  domains: {}".format(
+                    len(test_urls), len({get_domain(url) for url in test_urls})
+                )
+            )
+            return test_X, test_y, test_page_positions
+        case "EVENT_SOURCE":
+            storage.test_file = "EVENT_SOURCE"
+            test_urls = [
+                rec["Page URL"]
+                for rec in storage.iter_test_records(exclude_en=None)
+            ]
+            test_X, test_y, test_page_positions = storage.get_test_Xy(
+                validate=False,
+                contain_position=True,
+                scaled_page=scaled_page,
+                exclude_en=None,
+            )
+            print(
+                "pages: {}  domains: {}".format(
+                    len(test_urls), len({get_domain(url) for url in test_urls})
+                )
+            )
+            return test_X, test_y, test_page_positions
+        case None:
+            raise ValueError("Please assign type of test_data")
+        case _:
+            raise ValueError("Unexpected test_type")
 
 
 # %%
