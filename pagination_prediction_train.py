@@ -431,10 +431,7 @@ top_parent_tags = {}
 for page in token_features:
     for node in page:
         p_tag = node["parent-tag"]
-        if p_tag not in top_parent_tags:
-            top_parent_tags[p_tag] = 1
-        else:
-            top_parent_tags[p_tag] += 1
+        top_parent_tags[p_tag] = top_parent_tags.get(p_tag, 0) + 1
 
 sorted_parent_tags = sorted(
     top_parent_tags.items(), key=lambda x: x[1], reverse=True
