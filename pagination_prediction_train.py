@@ -12,7 +12,7 @@ import logging
 
 logging.basicConfig(
     format="%(asctime)s %(levelname)s %(message)s",
-    filename="example.log",
+    filename="train.log",
     encoding="utf-8",
     level=logging.DEBUG,
 )
@@ -162,6 +162,7 @@ sentence_model = SentenceTransformer(args.sentence_model_name)
 
 SEED = 42
 pl.seed_everything(SEED)
+logging.info(f"SEED: {SEED}")
 
 # %%
 labels = ["O", "PREV", "PAGE", "NEXT"]
@@ -353,6 +354,7 @@ def pages_to_word_vector(token_features) -> list[torch.Tensor]:
 storage = Storage()
 
 # %%
+logging.debug("Loading raw training data...")
 urls = [
     rec["Page URL"]
     for rec in storage.iter_records(
@@ -373,15 +375,19 @@ print(
         len(urls), len({get_domain(url) for url in urls})
     )
 )
+logging.debug("Loaded raw training data.")
 
 # %%
+logging.debug("Creating token/tag features...")
 token_features: list[list[dict]]
 # x_tag: features which only have tag true/false information
 # token_features: ['text-exact', 'query', 'parent-tag', 'class', 'text', 'text-full']
 token_features, x_tag = get_token_tag_features_from_chunks(X_raw)
 token_feature_titles: list[str] = list(token_features[0][0].keys())
+logging.debug("Created token/tag features.")
 
 # %%
+logging.debug("Creating class/query tokenizer...")
 class_token_map = {}
 query_token_map = {}
 
@@ -396,7 +402,7 @@ class_tokenizer = TagTokenizer(class_token_map)
 query_tokenizer = TagTokenizer(query_token_map)
 CLS_VOCAB_SIZE = class_tokenizer.get_size()
 QUERY_VOCAB_SIZE = query_tokenizer.get_size()
-
+logging.debug(f"Created class/query tokenizer: {CLS_VOCAB_SIZE=} {QUERY_VOCAB_SIZE=}")
 
 # %%
 def get_class_query_ids(page_tokens, max_len):
@@ -518,6 +524,21 @@ def get_input_from_raw(
         )
     ]
 
+    total_page  = 0
+    total_next = 0
+    total_none = 0
+    for lab in y_raw:
+        for l in lab:
+            match l:
+                case "NEXT":
+                    total_next += 1
+                case "PAGE":
+                    total_page += 1
+                case _:
+                    total_none += 1
+
+    logging.info(f"{total_page=} {total_next=} {total_none=} {total_page+total_next+total_none=}")
+
     if y_raw is not None:
         y: list[torch.Tensor] = [
             torch.tensor([tag2idx.get(l, 0) for l in lab]) for lab in y_raw
@@ -583,19 +604,24 @@ def get_test_data(test_type=None, scaled_page="normal"):
 
 
 # %%
+logging.debug("Creating training data...")
 x_train, y_train = get_input_from_raw(X_raw, y_raw, token_features)
+logging.debug("Created training data.")
 
 # %%
+logging.debug("Creating validation data...")
 x_val_raw: list[parsel.selector.SelectorList]
 x_val_raw, y_val_raw = storage.get_test_Xy_by_language(
     language="event", contain_button=True
 )
 x_val, y_val = get_input_from_raw(x_val_raw, y_val_raw)
+logging.debug("Created validation data.")
 
 # %%
+logging.debug("Creating test data...")
 test_x_raw, test_y_raw, test_page_positions = get_test_data("EVENT_SOURCE")
 x_test, y_test = get_input_from_raw(test_x_raw, test_y_raw)
-
+logging.debug("Created test data.")
 
 # %%
 class PPDataset(Dataset):
@@ -707,12 +733,15 @@ class PPDataModule(pl.LightningDataModule):
     #     ...
 
 # %%
+logging.debug("Exporting tokenizers...")
 prefix: str = "pp_data/"
 try:
     os.makedirs(prefix, exist_ok=True)
     with open(prefix + "url_char_tokenizer.pickle", "wb") as f:
+        logging.info(f"{url_char_tokenizer.vocab_size=}")
         pickle.dump(url_char_tokenizer, f)
     with open(prefix + "url_word_tokenizer.pickle", "wb") as f:
+        logging.info(f"{url_word_tokenizer.vocab_size=}")
         pickle.dump(url_word_tokenizer, f)
     with open(prefix + "class_token_map.json", "w") as f:
         f.write(json.dumps(class_tokenizer.map))
@@ -721,7 +750,8 @@ try:
     with open(prefix + "sorted_parent_tags.json", "w") as f:
         f.write(json.dumps(sorted_parent_tags))
 except:
-    print(f"Export fail")
+    logging.warning(f"Export fail")
+logging.debug("Exported tokenizers.")
 
 # %% [markdown]
 # ## Run
