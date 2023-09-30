@@ -345,7 +345,7 @@ def pages_to_word_vector(token_features) -> list[torch.Tensor]:
     return [
         sentence_model.encode(
             [node["text-full"] for node in page], convert_to_tensor=True
-        )
+        ).to("cpu")
         for page in token_features
     ]
 
@@ -650,7 +650,7 @@ def pad_collect(batch: list[tuple]):
 
     # (text, ptag, cls, query, url_char, url_word, tag) = zip(*xx)
     for feature in zip(*xx, strict=True):
-        # feature: tuple[torch.Tensor]
+        feature: tuple[torch.Tensor]
         # xx_pad.append(torch.nn.utils.rnn.pack_sequence(feature))
         xx_pad.append(
             pad_sequence(list(feature), batch_first=True, padding_value=0)
@@ -705,7 +705,7 @@ class PPDataModule(pl.LightningDataModule):
             self.train_dataset,
             batch_size=self.batch_size,
             shuffle=True,
-            num_workers=0,
+            num_workers=6,
             collate_fn=pad_collect,
             drop_last=True,
         )
@@ -715,7 +715,7 @@ class PPDataModule(pl.LightningDataModule):
             self.val_dataset,
             batch_size=self.batch_size,
             shuffle=False,
-            num_workers=0,
+            num_workers=6,
             collate_fn=pad_collect,
             drop_last=True,
         )
@@ -725,7 +725,7 @@ class PPDataModule(pl.LightningDataModule):
             self.test_dataset,
             batch_size=1,
             shuffle=False,
-            num_workers=0,
+            num_workers=6,
             collate_fn=pad_collect,
         )
 
