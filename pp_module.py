@@ -479,6 +479,35 @@ class PPModule(pl.LightningModule):
         self.test_label = []
 
     def on_test_epoch_end(self) -> None:
+        # Page level score
+        test_predictions_page_level = [
+            [node.cpu() for node in page_list]
+            for batch in self.test_predictions
+            for page_list in batch
+        ]
+        
+        test_label_page_level = [
+            page.tolist()
+            for batch in self.test_label
+            for page in batch
+        ]
+        
+        page_prec , page_rec , page_f1, next_prec, next_rec, next_f1, macro_f1, size = 0, 0, 0, 0, 0, 0, 0, 0
+        
+        for idx, (page_pred, page_true) in enumerate(zip(test_predictions_page_level, test_label_page_level)):
+            if self.tag2idx['NEXT'] not in page_true and self.tag2idx['PAGE'] not in page_true and self.tag2idx['PREV'] not in page_true:
+                continue
+            else:
+                size += 1
+            reports = classification_report(page_true, page_pred, labels=[0, 1, 2, 3], target_names=["O", "PREV", "PAGE", "NEXT"], digits=3, output_dict = True, zero_division=1)
+            page_prec += reports['PAGE']['precision']
+            page_rec += reports['PAGE']['recall']
+            page_f1 += reports['PAGE']['f1-score']
+            next_prec += reports['NEXT']['precision']
+            next_rec += reports['NEXT']['recall']
+            next_f1 += reports['NEXT']['f1-score']
+        page_level_record = {"page_prec": page_prec/size, "page_rec": page_rec/size, "page_f1": page_f1/size, "next_prec": next_prec/size, "next_rec": next_rec/size, "next_f1": next_f1/size}
+        
         # Flatten the list to nodes
         test_predictions_flat = [
             node.cpu()
@@ -501,6 +530,7 @@ class PPModule(pl.LightningModule):
             zero_division=1,
         )
         print(reports)
+        print(f'{page_level_record=}')
 
     def configure_optimizers(self):
         optimizer = torch.optim.Adam(
