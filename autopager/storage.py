@@ -139,8 +139,7 @@ class Storage(object):
         return X, y
 
     def iter_records(self, contain_button, file_type, language):
-#         info_path = os.path.join(self.path, 'data_2.csv')
-        info_path = os.path.join(self.path, 'data_all.csv')
+        info_path = os.path.join(self.path, 'data_all_event.csv')
         with io.open(info_path, encoding='utf8') as f:
             for row in csv.DictReader(f):
                 if row['failed']:
